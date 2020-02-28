@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { withFormik, Form as FormX, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import "./Form.css";
 
 const Form = ({ values, errors, touched, status }) => {
   const [users, setUsers] = useState([]);
+
+  let appDate = new Date();
   
   useEffect(() => {
     console.log("status has changed!", status);
@@ -65,7 +68,7 @@ const Form = ({ values, errors, touched, status }) => {
           Accept Terms of Service
           <Field
             type="checkbox"
-            name="TOS"
+            name="tos"
             checked={values.tos}
           />
           <span className="checkmark" />
@@ -76,12 +79,13 @@ const Form = ({ values, errors, touched, status }) => {
       </FormX>
       <pre>{JSON.stringify(values, null, 2)}</pre>
       <pre>{JSON.stringify(errors, null, 2)}</pre>
+      
       {users.map(user => {
         return (
           <ul key={user.id}>
             <li>Name: {user.name}</li>
             <li>Email: {user.email}</li>
-            <li>Password: {user.password}</li>
+            <li>Date: {appDate.toString()}</li>
           </ul>
         );
       })}
